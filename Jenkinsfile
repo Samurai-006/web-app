@@ -26,7 +26,9 @@ pipeline{
 			}
 		}
 		stage('Delivering'){
-			bat 'git push -u origin stable build'
+			steps{
+				bat 'git push -u origin stable build'
+			}
 		}
 	}
 }
