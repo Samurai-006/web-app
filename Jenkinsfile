@@ -17,14 +17,13 @@ pipeline{
 				'''
 			}
 		}
-		stage('Delivering'){
-			steps{
-				bat'''
-				git checkout -B stable-builds
-				git push origin stable-builds --force
-				'''
-			}
+		stage('Delivering') {
+		    steps {
+		        bat '"C:\\Program Files\\Git\\cmd\\git.exe" checkout -B stable-builds'
+		        bat '"C:\\Program Files\\Git\\cmd\\git.exe" push origin stable-builds --force'
+		    }
 		}
+
 		stage('Build docker'){
 			steps{
 				bat 'docker build -t python-webapp .'
