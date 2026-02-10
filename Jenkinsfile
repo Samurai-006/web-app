@@ -19,6 +19,7 @@ pipeline{
 		}
 		stage('Delivering') {
 		    steps {
+				bat 'git push origin stable-builds --force --verbose'
 		        bat 'git checkout -B stable-builds'
 		        bat 'git push origin stable-builds --force'
 		    }
