@@ -19,10 +19,10 @@ pipeline{
 		}
 		stage('Delivering') {
 		    steps {
-				bat 'git push origin stable-builds --force --verbose'
+				bat 'git ls-remote https://github.com/Samurai-006/web-app.git'
 		        bat 'git checkout -B stable-builds'
-		        bat 'git push origin stable-builds --force'
-		    }
+				bat 'git push origin stable-builds --force --verbose'
+			}
 		}
 
 		stage('Build docker'){
