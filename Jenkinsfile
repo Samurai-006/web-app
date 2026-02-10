@@ -2,10 +2,12 @@ pipeline{
 	agent any
 	stages{
 		stage('Installing dependencies'){
-			bat'''
-			pip install -r requirements.txt
-			pip install pytest
-			'''
+			steps{
+				bat'''
+				pip install -r requirements.txt
+				pip install pytest
+				'''
+			}
 		}
 		stage('Unit Test'){
 			steps{
