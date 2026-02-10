@@ -8,9 +8,11 @@ pipeline{
 		}
 		stage('Deploy Container'){
 			steps{
-				bat 'docker stop python-webapp || exit 0'
-				bat 'docker rm python-webapp || exit 0'
-				bat 'docker run -d -p 5000:5000 --name python-webapp python-webapp'
+				bat ''' 
+				'docker stop python-webapp'
+				'docker rm python-webapp'
+				'docker run -d -p 5000:5000 --name python-webapp python-webapp'
+				'''
 			}
 		}
 	}
