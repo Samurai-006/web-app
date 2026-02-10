@@ -1,19 +1,27 @@
 pipeline{
 	agent any
 	stages{
-		stage('GitHub code'){
-			steps{
-				git 'https://github.com/Samurai-006/web-app.git'
-			}
-		}
 		stage('Build docker'){
 			steps{
-				sh 'docker build -t python-webapp .'
+				bat 'docker build -t python-webapp .'
 			}
 		}
 		stage('Deploy Container'){
 			steps{
-				sh 'docker run -d -p 5000:5000 --name python-webapp python-webapp'
+				bat ''' 
+				docker stop python-webapp
+				docker rm python-webapp
+				docker run -d -p 5000:5000 --name python-webapp python-webapp
+				'''
+			}
+		}
+		stage('Unit Test'){
+			steps{
+				bat '''
+				pip install -r requirements.txt
+				pip install pytest
+				pytest
+				'''
 			}
 		}
 	}
