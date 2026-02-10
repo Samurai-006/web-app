@@ -19,8 +19,8 @@ pipeline{
 		}
 		stage('Delivering') {
 		    steps {
-		        bat '"C:\\Program Files\\Git\\cmd\\git.exe" checkout -B stable-builds'
-		        bat '"C:\\Program Files\\Git\\cmd\\git.exe" push origin stable-builds --force'
+		        bat 'git checkout -B stable-builds'
+		        bat 'git push origin stable-builds --force'
 		    }
 		}
 
