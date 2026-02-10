@@ -15,5 +15,14 @@ pipeline{
 				'''
 			}
 		}
+		stage('Unit Test'){
+			steps{
+				bat '''
+				pip install pytest
+				pip install -r requirements.txt
+				pytest
+				'''
+			}
+		}
 	}
 }
