@@ -21,8 +21,12 @@ pipeline{
 				pip install -r requirements.txt
 				pip install pytest
 				python -m pytest
+				echo "Test Successful"
 				'''
 			}
+		}
+		stage('Delivering'){
+			bat 'git push -u origin stable build'
 		}
 	}
 }
