@@ -20,7 +20,7 @@ pipeline{
 				bat '''
 				pip install -r requirements.txt
 				pip install pytest
-				pytest
+				python -m pytest
 				'''
 			}
 		}
