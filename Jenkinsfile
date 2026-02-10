@@ -19,12 +19,21 @@ pipeline{
 		}
 		stage('Delivering') {
 		    steps {
-				bat 'git ls-remote https://github.com/Samurai-006/web-app.git'
-		        bat 'git checkout -B stable-builds'
-				bat 'git push origin stable-builds --force --verbose'
-			}
+		        withCredentials([usernamePassword(
+		            credentialsId: 'git-cred',
+		            usernameVariable: 'GIT_USER',
+		            passwordVariable: 'GIT_PASS'
+		        )]) {
+		            bat '''
+		            git config user.email "jenkins@local"
+		            git config user.name "Jenkins"
+		
+		            git checkout -B stable-builds
+		            git push https://%GIT_USER%:%GIT_PASS%@github.com/Samurai-006/web-app.git stable-builds --force
+		            '''
+		        }
+		    }
 		}
-
 		stage('Build docker'){
 			steps{
 				bat 'docker build -t python-webapp .'
